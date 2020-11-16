@@ -13,10 +13,10 @@ import java.util.stream.Stream;
 public class App {
 	private final static String CMD_OPTION__LOG_NAME   = "log";
 	private final static String CMD_OPTION__THRESHOLD  = "threshold";
-	private final static String CMD_OPTION__PATTERN    = "pattern";
-	private final static String CMD_OPTION__TIMESTAMP_POSITION = "index";
-	private final static String CMD_OPTION__TIMESTAMP_TYPE = "kind";
-	private final static String CMD_OPTION__SHOW_SKIPPED = "skipped";
+	private final static String CMD_OPTION__TIMESTAMP_PATTERN = "timestamp-pattern";
+	private final static String CMD_OPTION__TIMESTAMP_POSITION = "timestamp-position";
+	private final static String CMD_OPTION__TIMESTAMP_TYPE = "timestamp-type";
+	private final static String CMD_OPTION__SHOW_SKIPPED = "show-skipped";
 
 	private final static TimestampType DEFAULT_TIMESTAMP_TYPE = TimestampType.TIME;
 	private final static int DEFAULT_TIMESTAMP_POSITION = 1;
@@ -27,13 +27,13 @@ public class App {
 			.withJarName("slow-log-analyzer")
 			.withDescription("Shows slow events in a log file")
 
-			.withRequiredArg(CMD_OPTION__LOG_NAME, "log file name")
+			.withRequiredArg(CMD_OPTION__LOG_NAME,  "log file name")
 			.withRequiredArg(CMD_OPTION__THRESHOLD, "event's duration threshold (in seconds)")
 
-			.withArg(CMD_OPTION__PATTERN, "log record's timestamp pattern")
+			.withArg(CMD_OPTION__TIMESTAMP_PATTERN, "tp", "log record's timestamp pattern")
 
 			.withArg(
-				CMD_OPTION__TIMESTAMP_POSITION,
+				CMD_OPTION__TIMESTAMP_POSITION, "tpos",
 				String.format("timestamp's first token position (default: %d)", DEFAULT_TIMESTAMP_POSITION)
 			)
 
@@ -55,9 +55,9 @@ public class App {
 						? TimestampType.valueOf(cmdLine.getOptionValue(CMD_OPTION__TIMESTAMP_TYPE))
 						: DEFAULT_TIMESTAMP_TYPE;
 
-					DateTimeFormatter pattern = cmdLine.hasOption(CMD_OPTION__PATTERN)
+					DateTimeFormatter pattern = cmdLine.hasOption(CMD_OPTION__TIMESTAMP_PATTERN)
 							? DateTimeFormatter.ofPattern(
-								cmdLine.getOptionValue(CMD_OPTION__PATTERN)
+								cmdLine.getOptionValue(CMD_OPTION__TIMESTAMP_PATTERN)
 							)
 							: timestampType.defaultPattern();
 
