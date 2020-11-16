@@ -1,13 +1,13 @@
-#1. Build the project in order to get an executable JAR
+# 1. Build the project in order to get an executable JAR
 ```bash
 mvn clean package
 ```
-#2. Check the artifact / read usage help
+# 2. Check the artifact / read usage help
 ```bash
 java -jar slow-log-analyzer-cli/target/slow-log-analyzer.jar -h
 ```
 
-#3. Usage example 
+# 3. Usage example 
 The next command shows log's events with duration above than 60 seconds  
 ```bash
 java -jar slow-log-analyzer.jar -l /var/log/system.log -t 60 -tpos 3
