@@ -13,5 +13,10 @@
     <artifactId>slow-log-analyzer-core</artifactId>
     <version>${version.main}</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>com.github.bogdanovmn.humanreadablevalues</groupId>
+            <artifactId>human-readable-values</artifactId>
+        </dependency>
+    </dependencies>
 </project>

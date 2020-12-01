@@ -21,6 +21,7 @@ public class LogFileEvents {
 		if (timestamp.isPresent()) {
 			events.add(
 				LogEvent.builder()
+					.id(events.size())
 					.message(logRecord)
 					.timestamp(timestamp.get())
 					.build()
@@ -38,11 +39,14 @@ public class LogFileEvents {
 	public List<SlowLogEvent> withDurationAboveThan(int threshold) {
 		List<SlowLogEvent> result = new ArrayList<>();
 		for (int i = 1; i < events.size(); i++) {
-			long duration = events.get(i).timestamp() - events.get(i - 1).timestamp();
+			LogEvent event = events.get(i);
+			LogEvent previousEvent = events.get(i - 1);
+			long duration = event.timestamp() - previousEvent.timestamp();
 			if (duration > threshold) {
 				result.add(
 					SlowLogEvent.builder()
-						.event(events.get(i - 1))
+						.nextEvent(event)
+						.event(previousEvent)
 						.durationInSeconds(duration)
 					.build()
 				);

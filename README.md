@@ -16,15 +16,19 @@ The **-tpos** argument just helps to find a timestamp value
 
 The result on my laptop:
 ```log
-[51299 sec] Nov 16 00:15:04 xpcproxy[9777]: libcoreservices: _dirhelper_userdir: 529: bootstrap_look_up returned (ipc/send) invalid destination port
-[29527 sec] Nov 16 14:30:03 com.apple.xpc.launchd[1] (com.apple.bsd.dirhelper[9784]): Endpoint has been activated through legacy launch(3) APIs. Please switch to XPC or bootstrap_check_in(): com.apple.bsd.dirhelper
-[528 sec] Nov 16 23:03:32 systemstats[54]: assertion failed: 18F132: systemstats + 673867 [0A10FDEF-5C7C-3D70-97F1-3A1D67836242]: 0x5
-[543 sec] Nov 16 23:13:32 systemstats[54]: assertion failed: 18F132: systemstats + 673867 [0A10FDEF-5C7C-3D70-97F1-3A1D67836242]: 0x5
-[472 sec] Nov 16 23:25:26 com.apple.xpc.launchd[1] (com.apple.imfoundation.IMRemoteURLConnectionAgent): Unknown key for integer: _DirtyJetsamMemoryLimit
-[590 sec] Nov 16 23:33:42 systemstats[54]: assertion failed: 18F132: systemstats + 673867 [0A10FDEF-5C7C-3D70-97F1-3A1D67836242]: 0x5
+Dec  1 00:15:06 syslogd[54]: Configuration Notice:
+... 21h 59m 59s ...
+Dec  1 22:15:05 syslogd[54]: ASL Sender Statistics
+
+...
+
+Dec  1 22:16:49 Google Chrome Helper[554]: Libnotify: notify_register_coalesced_registration failed with code 9 on line 2835
+... 2m 9s ...
+Dec  1 22:18:58 Google Chrome Helper[2616]: Libnotify: notify_register_coalesced_registration failed with code 9 on line 2835
 
 [*] Log statistic:
-Total lines: 106, events: 66, skipped: 40
+Total lines: 263, events: 233, skipped: 30
+
 
 ```
 

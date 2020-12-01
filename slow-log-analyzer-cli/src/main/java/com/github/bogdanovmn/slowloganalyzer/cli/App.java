@@ -1,10 +1,7 @@
 package com.github.bogdanovmn.slowloganalyzer.cli;
 
 import com.github.bogdanovmn.cmdline.CmdLineAppBuilder;
-import com.github.bogdanovmn.slowloganalyzer.core.LogFile;
-import com.github.bogdanovmn.slowloganalyzer.core.LogFileEvents;
-import com.github.bogdanovmn.slowloganalyzer.core.TimestampDefinition;
-import com.github.bogdanovmn.slowloganalyzer.core.TimestampType;
+import com.github.bogdanovmn.slowloganalyzer.core.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
@@ -78,11 +75,26 @@ public class App {
 							.build()
 					);
 
-					events.withDurationAboveThan(
-						Integer.parseInt(
-							cmdLine.getOptionValue(CMD_OPTION__THRESHOLD)
+					new SlowLogEventsVisualization(
+						events.withDurationAboveThan(
+							Integer.parseInt(
+								cmdLine.getOptionValue(CMD_OPTION__THRESHOLD)
+							)
 						)
-					).forEach(System.out::println);
+					).view().stream()
+						.map(
+							line -> {
+								switch (line.type()) {
+									case NOTE:
+										return String.format("... %s ...", line.value());
+									case NEW_EVENT_SEPARATOR:
+										return "\n...\n";
+									default:
+										return line.value();
+								}
+							}
+						)
+						.forEach(System.out::println);
 
 					events.printStatistic(cmdLine.hasOption(CMD_OPTION__SHOW_SKIPPED));
 

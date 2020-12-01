@@ -27,7 +27,10 @@ public class LogFileTest {
 			longEvents.size()
 		);
 
-		longEvents.forEach(System.out::println);
+		new SlowLogEventsVisualization(longEvents).view()
+			.stream()
+				.map(x -> x.type() == VisualizationLineType.NOTE ? String.format("... %s ...", x.value()) : x.value())
+				.forEach(System.out::println);
 		events.printStatistic(true);
 	}
 
@@ -48,6 +51,7 @@ public class LogFileTest {
 			events.size()
 		);
 
-		events.forEach(System.out::println);
+		new SlowLogEventsVisualization(events).view()
+			.forEach(System.out::println);
 	}
 }
